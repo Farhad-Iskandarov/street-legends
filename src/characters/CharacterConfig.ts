@@ -1,7 +1,9 @@
 export interface CharacterAppearance {
   skinTone: number;
   hairColor: number;
-  hairStyle: 'short' | 'spiky' | 'hoodie' | 'ponytail' | 'braids' | 'undercut' | 'fade';
+  eyeColor?: number;
+  lipColor?: number;
+  hairStyle: 'short' | 'spiky' | 'hoodie' | 'ponytail' | 'braids' | 'undercut' | 'fade' | 'half_up_wavy';
   primaryColor: number;     // Jacket / Top
   secondaryColor: number;   // Pants / Bottoms
   accentColor: number;      // Trim / Shoes / Gloves
@@ -28,17 +30,21 @@ export interface SpecialAttackConfig {
 }
 
 export interface CharacterConfig {
-  id: string; // fighter_01, fighter_02, fighter_03, fighter_04, fighter_05
+  id: string; // fighter_01, fighter_02, fighter_03, fighter_04, fighter_05, or custom id like aynur
   name: string; // Editable display name
+  displayName?: string;
   gender: 'male' | 'female';
   title: string;
   archetype: string;
   bio: string;
   avatarIcon: string;
   portraitPath: string;
-  modelPath: string; // e.g., '/assets/characters/fighter-01/model.glb'
+  previewImagePath?: string;
+  modelPath: string; // e.g., '/assets/characters/aynur/model.glb'
   positionOffset: { x: number; y: number; z: number };
   scale: { x: number; y: number; z: number };
+  visualNotes?: string;
+  outfitNotes?: string;
   outfit: OutfitConfig;
   appearance: CharacterAppearance;
   specialAttack: SpecialAttackConfig;
@@ -63,33 +69,38 @@ export interface CharacterConfig {
 
 export const CHARACTERS_REGISTRY: Record<string, CharacterConfig> = {
   fighter_01: {
-    id: 'fighter_01',
-    name: 'ALEX', // Replaceable with real name later
+    id: 'tacir',
+    name: 'TACIR',
+    displayName: 'Tacir',
     gender: 'male',
     title: 'THE STREET BRAWLER',
     archetype: 'Balanced Striker',
-    bio: 'A resilient street combatant with an aggressive boxing stance and balanced all-around combat fundamentals.',
+    bio: 'A resilient, battle-hardened street brawler in tailored black attire with rolled sleeves, delivering disciplined boxing combos and fiery strikes.',
     avatarIcon: '🥊',
-    portraitPath: '/assets/characters/fighter-01/portrait.png',
-    modelPath: '/assets/characters/fighter-01/model.glb',
+    portraitPath: '/assets/characters/tacir/preview.webp',
+    previewImagePath: '/assets/characters/tacir/preview.webp',
+    modelPath: '/assets/characters/tacir/model.glb',
     positionOffset: { x: 0, y: 0, z: 0 },
-    scale: { x: 1.0, y: 1.0, z: 1.0 },
+    scale: { x: 0.96, y: 1.0, z: 0.96 },
+    visualNotes: 'Stylized muscular male fighter with slicked-back dark hair, prominent eyebrows, full dark beard and mustache, and an intense guarded stance.',
+    outfitNotes: 'Tailored black button-down shirt with sleeves rolled past the forearms, matching black trousers with a silver-buckled leather belt, and heavy black boots.',
     outfit: {
-      styleName: 'Modern Street Fighter',
-      topDescription: 'Dark tactical combat jacket over athletic compression shirt',
-      bottomDescription: 'Reinforced street combat trousers',
-      footwear: 'High-top black athletic cross-trainers with cyan trim',
-      gloves: 'Cyan protective hand wraps'
+      styleName: 'Tailored Black Brawler Attire',
+      topDescription: 'Tailored black button-down collared shirt with rolled sleeves',
+      bottomDescription: 'Black tailored trousers with silver-buckled leather belt',
+      footwear: 'Heavy-duty black combat boots',
+      gloves: 'Bare-knuckle disciplined boxing stance'
     },
     appearance: {
       skinTone: 0xd4a373,
-      hairColor: 0x24180b,
+      hairColor: 0x1c1917,
+      eyeColor: 0x2b1810,
       hairStyle: 'short',
-      primaryColor: 0x1e293b,    // Dark modern street jacket
-      secondaryColor: 0x0f172a,  // Dark combat denim
-      accentColor: 0x00d2ff,     // Cyan electric trim & wraps
+      primaryColor: 0x18181b,    // Tailored black button-down shirt
+      secondaryColor: 0x27272a,  // Matching black trousers
+      accentColor: 0xe2e8f0,     // Silver belt buckle & buttons
       gender: 'male',
-      scale: { x: 1.0, y: 1.0, z: 1.0 }
+      scale: { x: 0.96, y: 1.0, z: 0.96 }
     },
     specialAttack: {
       name: 'FIRE STRIKE',
@@ -120,33 +131,38 @@ export const CHARACTERS_REGISTRY: Record<string, CharacterConfig> = {
   },
 
   fighter_02: {
-    id: 'fighter_02',
-    name: 'MAX', // Replaceable with real name later
+    id: 'farhad',
+    name: 'FARHAD',
+    displayName: 'Farhad',
     gender: 'male',
-    title: 'IRON JUGGERNAUT',
+    title: 'SHADOW BRAWLER',
     archetype: 'Heavy Boxer',
-    bio: 'A heavyweight power striker possessing a solid guard, explosive counter-punching, and devastating knockback.',
-    avatarIcon: '💥',
-    portraitPath: '/assets/characters/fighter-02/portrait.png',
-    modelPath: '/assets/characters/fighter-02/model.glb',
+    bio: 'A focused powerhouse striker in stealth black streetwear and cargo trousers, delivering heavy knockout punches and counter-strikes.',
+    avatarIcon: '🥊',
+    portraitPath: '/assets/characters/farhad/preview.webp',
+    previewImagePath: '/assets/characters/farhad/preview.webp',
+    modelPath: '/assets/characters/farhad/model.glb',
     positionOffset: { x: 0, y: 0, z: 0 },
-    scale: { x: 1.12, y: 1.04, z: 1.12 },
+    scale: { x: 0.96, y: 1.0, z: 0.96 },
+    visualNotes: 'Stylized 3D male fighter with dark curly hair faded on the sides, defined dark eyebrows, focused eyes, and a neat dark beard and mustache.',
+    outfitNotes: 'Matte black ribbed long-sleeve crewneck sweatshirt, black cargo pants with thigh utility flap pockets and cuffed ankles, and crisp white low-top sneakers.',
     outfit: {
-      styleName: 'Sport-Inspired Power Fighter',
-      topDescription: 'Fitted athletic sports compression shirt',
-      bottomDescription: 'Heavy-duty athletic training shorts',
-      footwear: 'Low-profile boxing boots',
-      gloves: 'Gold competition boxing gloves'
+      styleName: 'All-Black Crewneck & Cargo Streetwear',
+      topDescription: 'Matte black long-sleeved ribbed crewneck pullover sweatshirt',
+      bottomDescription: 'Relaxed black cargo trousers with outer thigh flap pockets and elastic ankle cuffs',
+      footwear: 'Crisp white low-top court sneakers',
+      gloves: 'Bare-knuckle power boxing stance'
     },
     appearance: {
-      skinTone: 0xbb8056,
+      skinTone: 0xf1c2a0,
       hairColor: 0x171717,
-      hairStyle: 'spiky',
-      primaryColor: 0xea580c,    // Sport orange athletic top
-      secondaryColor: 0x18181b,  // Charcoal training shorts
-      accentColor: 0xf59e0b,     // Gold boxing gloves & laces
+      eyeColor: 0x3b82f6,
+      hairStyle: 'short',
+      primaryColor: 0x18181b,    // Matte black crewneck sweatshirt
+      secondaryColor: 0x27272a,  // Black cargo trousers
+      accentColor: 0xf8fafc,     // Crisp white sneakers
       gender: 'male',
-      scale: { x: 1.14, y: 1.04, z: 1.14 }
+      scale: { x: 0.96, y: 1.0, z: 0.96 }
     },
     specialAttack: {
       name: 'THUNDER KICK',
@@ -177,33 +193,38 @@ export const CHARACTERS_REGISTRY: Record<string, CharacterConfig> = {
   },
 
   fighter_03: {
-    id: 'fighter_03',
-    name: 'RYAN', // Replaceable with real name later
+    id: 'rufat',
+    name: 'RUFAT',
+    displayName: 'Rufat',
     gender: 'male',
-    title: 'WIND WALKER',
+    title: 'WILD COMPANION',
     archetype: 'Urban Martial Artist',
-    bio: 'An urban parkour master and taekwondo specialist combining aerial kicks with quick repositioning.',
-    avatarIcon: '⚡',
-    portraitPath: '/assets/characters/fighter-03/portrait.png',
-    modelPath: '/assets/characters/fighter-03/model.glb',
+    bio: 'An agile street fighter accompanied by his loyal shoulder monkey, wearing a crisp crewneck sweater, black backpack, and dark cargo pants.',
+    avatarIcon: '🐒',
+    portraitPath: '/assets/characters/rufat/preview.webp',
+    previewImagePath: '/assets/characters/rufat/preview.webp',
+    modelPath: '/assets/characters/rufat/model.glb',
     positionOffset: { x: 0, y: 0, z: 0 },
-    scale: { x: 0.96, y: 1.02, z: 0.96 },
+    scale: { x: 0.96, y: 1.0, z: 0.96 },
+    visualNotes: 'Stylized 3D male fighter with a short dark fade haircut, trimmed beard, confident smile, and an orange monkey companion perched on his right shoulder.',
+    outfitNotes: 'Light off-white ribbed crewneck sweater with black backpack shoulder straps, dark charcoal cargo pants with side flap pockets, and crisp white sneakers.',
     outfit: {
-      styleName: 'Urban Martial Arts Combatant',
-      topDescription: 'Distinctive emerald hooded martial arts jacket with contrast trim',
-      bottomDescription: 'Flexible combat cargo trousers with knee articulation',
-      footwear: 'High-traction martial arts kicking boots',
-      gloves: 'Fingerless tactical combat gloves'
+      styleName: 'Backpack & Shoulder Monkey Street Style',
+      topDescription: 'Light off-white ribbed crewneck sweatshirt with black backpack straps and shoulder monkey companion',
+      bottomDescription: 'Dark charcoal-black cargo trousers with thigh flap pockets and tapered cuffs',
+      footwear: 'Chunky crisp white low-top athletic sneakers',
+      gloves: 'Bare-knuckle street fighting stance'
     },
     appearance: {
-      skinTone: 0xf6c89f,
-      hairColor: 0x3f2e18,
-      hairStyle: 'hoodie',
-      primaryColor: 0x15803d,    // Emerald hooded martial vest
-      secondaryColor: 0x334155,  // Slate cargo combat trousers
-      accentColor: 0x4ade80,     // Lime trim & kicking boots
+      skinTone: 0xf4c6a8,
+      hairColor: 0x1c1917,
+      eyeColor: 0x3b2219,
+      hairStyle: 'short',
+      primaryColor: 0xe2e8f0,    // Off-white crewneck sweatshirt
+      secondaryColor: 0x27272a,  // Dark charcoal cargo trousers
+      accentColor: 0xd97706,     // Orange shoulder monkey & white sneaker accents
       gender: 'male',
-      scale: { x: 0.96, y: 1.02, z: 0.96 }
+      scale: { x: 0.96, y: 1.0, z: 0.96 }
     },
     specialAttack: {
       name: 'SHADOW RUSH',
@@ -234,42 +255,48 @@ export const CHARACTERS_REGISTRY: Record<string, CharacterConfig> = {
   },
 
   fighter_04: {
-    id: 'fighter_04',
-    name: 'LUNA', // Replaceable with real name later
+    id: 'aynur',
+    name: 'AYNUR',
+    displayName: 'Aynur',
     gender: 'female',
-    title: 'SHADOW VIPER',
-    archetype: 'Stealth Martial Artist',
-    bio: 'An agile modern female martial artist utilizing rapid-fire strikes and elusive defensive posture.',
-    avatarIcon: '🌙',
-    portraitPath: '/assets/characters/fighter-04/portrait.png',
-    modelPath: '/assets/characters/fighter-04/model.glb',
+    title: 'CRIMSON ROSE',
+    archetype: 'Elegant Precision Striker',
+    bio: 'A confident, poised, and stylish street fighter in her signature crimson puffer jacket and crossbody bag, delivering fast precision combos.',
+    avatarIcon: '🌸',
+    portraitPath: '/assets/characters/aynur/preview.webp',
+    previewImagePath: '/assets/characters/aynur/preview.webp',
+    modelPath: '/assets/characters/aynur/model.glb',
     positionOffset: { x: 0, y: 0, z: 0 },
-    scale: { x: 0.92, y: 0.98, z: 0.92 },
+    scale: { x: 0.96, y: 1.0, z: 0.96 },
+    visualNotes: 'Stylized 3D character matching the Tripo3D model: fair warm skin tone with rosy cheeks, large expressive dark brown eyes, defined dark eyebrows, friendly confident smile, and voluminous dark wavy hair parted slightly off-center cascading over both shoulders.',
+    outfitNotes: 'Bright crimson/red quilted puffer jacket worn open with white trim and snap button cuffs over an off-white ribbed cable-knit sweater, matching red quilted crescent crossbody bag slung from right shoulder to left hip, charcoal-slate jogger pants with silver side-seam studs, and chunky crisp white sneakers.',
     outfit: {
-      styleName: 'Modern Female Martial Artist',
-      topDescription: 'Fitted athletic fighting top with protective chest guard',
-      bottomDescription: 'High-mobility athletic combat leggings',
-      footwear: 'Low-profile ninja-inspired split-toe combat shoes',
-      gloves: 'Reinforced forearm guards and wrist wraps'
+      styleName: 'Red Puffer & Crossbody Street Style',
+      topDescription: 'Bright crimson quilted puffer jacket worn open over cream cable-knit sweater with red crescent crossbody bag',
+      bottomDescription: 'Charcoal-gray relaxed joggers with silver side-seam rivet studs and ankle cuffs',
+      footwear: 'Chunky crisp white platform athletic sneakers',
+      gloves: 'Bare-knuckle street fighting stance with silver-buttoned red jacket cuffs'
     },
     appearance: {
-      skinTone: 0xfce7d2,
-      hairColor: 0x1e1b4b,
-      hairStyle: 'ponytail',
-      primaryColor: 0x7c3aed,    // Royal purple martial suit
-      secondaryColor: 0x111827,  // Dark stealth leggings
-      accentColor: 0xc084fc,     // Magenta glowing wrist wraps
+      skinTone: 0xf4c6a8,        // Fair warm peach skin tone matching Tripo3D model
+      hairColor: 0x261714,       // Deep dark espresso brunette wavy hair
+      eyeColor: 0x2b1810,        // Large expressive dark brown eyes
+      lipColor: 0xd14949,        // Vibrant warm red-rose smile
+      hairStyle: 'half_up_wavy', // Voluminous parted wavy hair cascading over shoulders
+      primaryColor: 0xc8102e,    // Bright crimson/red quilted puffer jacket & crossbody bag
+      secondaryColor: 0x52525b,  // Charcoal/slate gray studded jogger pants
+      accentColor: 0xf8fafc,     // Crisp off-white sweater & chunky white sneakers
       gender: 'female',
-      scale: { x: 0.92, y: 0.98, z: 0.92 }
+      scale: { x: 0.96, y: 1.0, z: 0.96 }
     },
     specialAttack: {
       name: 'PHOENIX KICK',
       type: 'phoenix_kick',
       damage: 20,
       cooldown: 6.0,
-      color: 0xef4444,
-      secondaryColor: 0xfacc15,
-      description: 'Launches a soaring rising martial kick enveloped in red and gold radiant phoenix flame trails.'
+      color: 0xc8102e,
+      secondaryColor: 0xfda4af,
+      description: 'Launches a soaring rising martial kick enveloped in crimson-red and radiant rose energy trails.'
     },
     stats: {
       maxHealth: 100,
@@ -291,33 +318,39 @@ export const CHARACTERS_REGISTRY: Record<string, CharacterConfig> = {
   },
 
   fighter_05: {
-    id: 'fighter_05',
-    name: 'MAYA', // Replaceable with real name later
+    id: 'sevil',
+    name: 'SEVIL',
+    displayName: 'Sevil',
     gender: 'female',
-    title: 'DESERT BLADE',
-    archetype: 'Street Combat Specialist',
-    bio: 'A relentless street combat veteran who pairs punishing close-range strikes with comfortable athletic gear.',
-    avatarIcon: '🔥',
-    portraitPath: '/assets/characters/fighter-05/portrait.png',
-    modelPath: '/assets/characters/fighter-05/model.glb',
+    title: 'BOHO BLOSSOM',
+    archetype: 'Floral Boho Striker',
+    bio: 'A vibrant bohemian martial artist adorned with a daisy flower crown, floral bell-sleeve tunic, and flared embroidered trousers, striking with fluid precision.',
+    avatarIcon: '🌼',
+    portraitPath: '/assets/characters/sevil/preview.webp',
+    previewImagePath: '/assets/characters/sevil/preview.webp',
+    modelPath: '/assets/characters/sevil/model.glb',
     positionOffset: { x: 0, y: 0, z: 0 },
-    scale: { x: 0.95, y: 1.0, z: 0.95 },
+    scale: { x: 0.96, y: 1.0, z: 0.96 },
+    visualNotes: 'Stylized 3D female martial artist with center-parted dark brown bob hair, white daisy flower crown, warm smile, turquoise choker, and medallion necklace.',
+    outfitNotes: 'Floral bell-sleeved boho tunic in golden yellow, pink, and brown with mandala medallion belt, fingerless brown combat wraps, floral-embroidered flared brown pants, and rugged lace-up boots.',
     outfit: {
-      styleName: 'Stylish Street-Combat Striker',
-      topDescription: 'Comfortable athletic sports top with traditional fighter cord bindings',
-      bottomDescription: 'Relaxed athletic street-combat trousers',
-      footwear: 'Lightweight ankle-supported street combat shoes',
-      gloves: 'Traditional rope and canvas hand bindings'
+      styleName: 'Floral Boho & Daisy Crown',
+      topDescription: 'Off-shoulder floral bohemian bell-sleeve tunic with turquoise choker and mandala medallion belt',
+      bottomDescription: 'Flared brown bell-bottom trousers with vibrant floral hem embroidery',
+      footwear: 'Chunky brown lace-up combat boots',
+      gloves: 'Fingerless brown leather combat wraps with red wrist bands'
     },
     appearance: {
-      skinTone: 0x935f3d,
-      hairColor: 0x0a0a0a,
-      hairStyle: 'braids',
-      primaryColor: 0xbe123c,    // Crimson combat crop
-      secondaryColor: 0xf59e0b,  // Golden athletic trousers
-      accentColor: 0xfacc15,     // Gold forehead warrior band
+      skinTone: 0xf1c2a0,
+      hairColor: 0x3b2219,
+      eyeColor: 0x3b2219,
+      lipColor: 0xb91c1c,
+      hairStyle: 'half_up_wavy',
+      primaryColor: 0xd97706,    // Golden floral boho tunic
+      secondaryColor: 0x5c3a36,  // Brown flared embroidered trousers
+      accentColor: 0xfef08a,     // Daisy flower crown & floral accents
       gender: 'female',
-      scale: { x: 0.95, y: 1.0, z: 0.95 }
+      scale: { x: 0.96, y: 1.0, z: 0.96 }
     },
     specialAttack: {
       name: 'DRAGON SPIN',
@@ -348,11 +381,16 @@ export const CHARACTERS_REGISTRY: Record<string, CharacterConfig> = {
   }
 };
 
-// Aliases for Step 1 compatibility
+// Aliases for Step 1 & Character Pipeline compatibility
+CHARACTERS_REGISTRY['tacir'] = CHARACTERS_REGISTRY['fighter_01'];
 CHARACTERS_REGISTRY['alex'] = CHARACTERS_REGISTRY['fighter_01'];
+CHARACTERS_REGISTRY['farhad'] = CHARACTERS_REGISTRY['fighter_02'];
 CHARACTERS_REGISTRY['max'] = CHARACTERS_REGISTRY['fighter_02'];
+CHARACTERS_REGISTRY['rufat'] = CHARACTERS_REGISTRY['fighter_03'];
 CHARACTERS_REGISTRY['ryan'] = CHARACTERS_REGISTRY['fighter_03'];
+CHARACTERS_REGISTRY['aynur'] = CHARACTERS_REGISTRY['fighter_04'];
 CHARACTERS_REGISTRY['luna'] = CHARACTERS_REGISTRY['fighter_04'];
+CHARACTERS_REGISTRY['sevil'] = CHARACTERS_REGISTRY['fighter_05'];
 CHARACTERS_REGISTRY['maya'] = CHARACTERS_REGISTRY['fighter_05'];
 
 // Primary 5-fighter list in order

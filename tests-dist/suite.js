@@ -3,37 +3,41 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 const CHARACTERS_REGISTRY = {
   fighter_01: {
-    id: "fighter_01",
-    name: "ALEX",
-    // Replaceable with real name later
+    id: "tacir",
+    name: "TACIR",
+    displayName: "Tacir",
     gender: "male",
     title: "THE STREET BRAWLER",
     archetype: "Balanced Striker",
-    bio: "A resilient street combatant with an aggressive boxing stance and balanced all-around combat fundamentals.",
+    bio: "A resilient, battle-hardened street brawler in tailored black attire with rolled sleeves, delivering disciplined boxing combos and fiery strikes.",
     avatarIcon: "🥊",
-    portraitPath: "/assets/characters/fighter-01/portrait.png",
-    modelPath: "/assets/characters/fighter-01/model.glb",
+    portraitPath: "/assets/characters/tacir/preview.webp",
+    previewImagePath: "/assets/characters/tacir/preview.webp",
+    modelPath: "/assets/characters/tacir/model.glb",
     positionOffset: { x: 0, y: 0, z: 0 },
-    scale: { x: 1, y: 1, z: 1 },
+    scale: { x: 0.96, y: 1, z: 0.96 },
+    visualNotes: "Stylized muscular male fighter with slicked-back dark hair, prominent eyebrows, full dark beard and mustache, and an intense guarded stance.",
+    outfitNotes: "Tailored black button-down shirt with sleeves rolled past the forearms, matching black trousers with a silver-buckled leather belt, and heavy black boots.",
     outfit: {
-      styleName: "Modern Street Fighter",
-      topDescription: "Dark tactical combat jacket over athletic compression shirt",
-      bottomDescription: "Reinforced street combat trousers",
-      footwear: "High-top black athletic cross-trainers with cyan trim",
-      gloves: "Cyan protective hand wraps"
+      styleName: "Tailored Black Brawler Attire",
+      topDescription: "Tailored black button-down collared shirt with rolled sleeves",
+      bottomDescription: "Black tailored trousers with silver-buckled leather belt",
+      footwear: "Heavy-duty black combat boots",
+      gloves: "Bare-knuckle disciplined boxing stance"
     },
     appearance: {
       skinTone: 13935475,
-      hairColor: 2365451,
+      hairColor: 1841431,
+      eyeColor: 2824208,
       hairStyle: "short",
-      primaryColor: 1976635,
-      // Dark modern street jacket
-      secondaryColor: 988970,
-      // Dark combat denim
-      accentColor: 54015,
-      // Cyan electric trim & wraps
+      primaryColor: 1579035,
+      // Tailored black button-down shirt
+      secondaryColor: 2565930,
+      // Matching black trousers
+      accentColor: 14870768,
+      // Silver belt buckle & buttons
       gender: "male",
-      scale: { x: 1, y: 1, z: 1 }
+      scale: { x: 0.96, y: 1, z: 0.96 }
     },
     specialAttack: {
       name: "FIRE STRIKE",
@@ -63,37 +67,41 @@ const CHARACTERS_REGISTRY = {
     }
   },
   fighter_02: {
-    id: "fighter_02",
-    name: "MAX",
-    // Replaceable with real name later
+    id: "farhad",
+    name: "FARHAD",
+    displayName: "Farhad",
     gender: "male",
-    title: "IRON JUGGERNAUT",
+    title: "SHADOW BRAWLER",
     archetype: "Heavy Boxer",
-    bio: "A heavyweight power striker possessing a solid guard, explosive counter-punching, and devastating knockback.",
-    avatarIcon: "💥",
-    portraitPath: "/assets/characters/fighter-02/portrait.png",
-    modelPath: "/assets/characters/fighter-02/model.glb",
+    bio: "A focused powerhouse striker in stealth black streetwear and cargo trousers, delivering heavy knockout punches and counter-strikes.",
+    avatarIcon: "🥊",
+    portraitPath: "/assets/characters/farhad/preview.webp",
+    previewImagePath: "/assets/characters/farhad/preview.webp",
+    modelPath: "/assets/characters/farhad/model.glb",
     positionOffset: { x: 0, y: 0, z: 0 },
-    scale: { x: 1.12, y: 1.04, z: 1.12 },
+    scale: { x: 0.96, y: 1, z: 0.96 },
+    visualNotes: "Stylized 3D male fighter with dark curly hair faded on the sides, defined dark eyebrows, focused eyes, and a neat dark beard and mustache.",
+    outfitNotes: "Matte black ribbed long-sleeve crewneck sweatshirt, black cargo pants with thigh utility flap pockets and cuffed ankles, and crisp white low-top sneakers.",
     outfit: {
-      styleName: "Sport-Inspired Power Fighter",
-      topDescription: "Fitted athletic sports compression shirt",
-      bottomDescription: "Heavy-duty athletic training shorts",
-      footwear: "Low-profile boxing boots",
-      gloves: "Gold competition boxing gloves"
+      styleName: "All-Black Crewneck & Cargo Streetwear",
+      topDescription: "Matte black long-sleeved ribbed crewneck pullover sweatshirt",
+      bottomDescription: "Relaxed black cargo trousers with outer thigh flap pockets and elastic ankle cuffs",
+      footwear: "Crisp white low-top court sneakers",
+      gloves: "Bare-knuckle power boxing stance"
     },
     appearance: {
-      skinTone: 12288086,
+      skinTone: 15844e3,
       hairColor: 1513239,
-      hairStyle: "spiky",
-      primaryColor: 15357964,
-      // Sport orange athletic top
-      secondaryColor: 1579035,
-      // Charcoal training shorts
-      accentColor: 16096779,
-      // Gold boxing gloves & laces
+      eyeColor: 3900150,
+      hairStyle: "short",
+      primaryColor: 1579035,
+      // Matte black crewneck sweatshirt
+      secondaryColor: 2565930,
+      // Black cargo trousers
+      accentColor: 16317180,
+      // Crisp white sneakers
       gender: "male",
-      scale: { x: 1.14, y: 1.04, z: 1.14 }
+      scale: { x: 0.96, y: 1, z: 0.96 }
     },
     specialAttack: {
       name: "THUNDER KICK",
@@ -123,37 +131,41 @@ const CHARACTERS_REGISTRY = {
     }
   },
   fighter_03: {
-    id: "fighter_03",
-    name: "RYAN",
-    // Replaceable with real name later
+    id: "rufat",
+    name: "RUFAT",
+    displayName: "Rufat",
     gender: "male",
-    title: "WIND WALKER",
+    title: "WILD COMPANION",
     archetype: "Urban Martial Artist",
-    bio: "An urban parkour master and taekwondo specialist combining aerial kicks with quick repositioning.",
-    avatarIcon: "⚡",
-    portraitPath: "/assets/characters/fighter-03/portrait.png",
-    modelPath: "/assets/characters/fighter-03/model.glb",
+    bio: "An agile street fighter accompanied by his loyal shoulder monkey, wearing a crisp crewneck sweater, black backpack, and dark cargo pants.",
+    avatarIcon: "🐒",
+    portraitPath: "/assets/characters/rufat/preview.webp",
+    previewImagePath: "/assets/characters/rufat/preview.webp",
+    modelPath: "/assets/characters/rufat/model.glb",
     positionOffset: { x: 0, y: 0, z: 0 },
-    scale: { x: 0.96, y: 1.02, z: 0.96 },
+    scale: { x: 0.96, y: 1, z: 0.96 },
+    visualNotes: "Stylized 3D male fighter with a short dark fade haircut, trimmed beard, confident smile, and an orange monkey companion perched on his right shoulder.",
+    outfitNotes: "Light off-white ribbed crewneck sweater with black backpack shoulder straps, dark charcoal cargo pants with side flap pockets, and crisp white sneakers.",
     outfit: {
-      styleName: "Urban Martial Arts Combatant",
-      topDescription: "Distinctive emerald hooded martial arts jacket with contrast trim",
-      bottomDescription: "Flexible combat cargo trousers with knee articulation",
-      footwear: "High-traction martial arts kicking boots",
-      gloves: "Fingerless tactical combat gloves"
+      styleName: "Backpack & Shoulder Monkey Street Style",
+      topDescription: "Light off-white ribbed crewneck sweatshirt with black backpack straps and shoulder monkey companion",
+      bottomDescription: "Dark charcoal-black cargo trousers with thigh flap pockets and tapered cuffs",
+      footwear: "Chunky crisp white low-top athletic sneakers",
+      gloves: "Bare-knuckle street fighting stance"
     },
     appearance: {
-      skinTone: 16173215,
-      hairColor: 4140568,
-      hairStyle: "hoodie",
-      primaryColor: 1409085,
-      // Emerald hooded martial vest
-      secondaryColor: 3359061,
-      // Slate cargo combat trousers
-      accentColor: 4906624,
-      // Lime trim & kicking boots
+      skinTone: 16041640,
+      hairColor: 1841431,
+      eyeColor: 3875353,
+      hairStyle: "short",
+      primaryColor: 14870768,
+      // Off-white crewneck sweatshirt
+      secondaryColor: 2565930,
+      // Dark charcoal cargo trousers
+      accentColor: 14251782,
+      // Orange shoulder monkey & white sneaker accents
       gender: "male",
-      scale: { x: 0.96, y: 1.02, z: 0.96 }
+      scale: { x: 0.96, y: 1, z: 0.96 }
     },
     specialAttack: {
       name: "SHADOW RUSH",
@@ -183,46 +195,56 @@ const CHARACTERS_REGISTRY = {
     }
   },
   fighter_04: {
-    id: "fighter_04",
-    name: "LUNA",
-    // Replaceable with real name later
+    id: "aynur",
+    name: "AYNUR",
+    displayName: "Aynur",
     gender: "female",
-    title: "SHADOW VIPER",
-    archetype: "Stealth Martial Artist",
-    bio: "An agile modern female martial artist utilizing rapid-fire strikes and elusive defensive posture.",
-    avatarIcon: "🌙",
-    portraitPath: "/assets/characters/fighter-04/portrait.png",
-    modelPath: "/assets/characters/fighter-04/model.glb",
+    title: "CRIMSON ROSE",
+    archetype: "Elegant Precision Striker",
+    bio: "A confident, poised, and stylish street fighter in her signature crimson puffer jacket and crossbody bag, delivering fast precision combos.",
+    avatarIcon: "🌸",
+    portraitPath: "/assets/characters/aynur/preview.webp",
+    previewImagePath: "/assets/characters/aynur/preview.webp",
+    modelPath: "/assets/characters/aynur/model.glb",
     positionOffset: { x: 0, y: 0, z: 0 },
-    scale: { x: 0.92, y: 0.98, z: 0.92 },
+    scale: { x: 0.96, y: 1, z: 0.96 },
+    visualNotes: "Stylized 3D character matching the Tripo3D model: fair warm skin tone with rosy cheeks, large expressive dark brown eyes, defined dark eyebrows, friendly confident smile, and voluminous dark wavy hair parted slightly off-center cascading over both shoulders.",
+    outfitNotes: "Bright crimson/red quilted puffer jacket worn open with white trim and snap button cuffs over an off-white ribbed cable-knit sweater, matching red quilted crescent crossbody bag slung from right shoulder to left hip, charcoal-slate jogger pants with silver side-seam studs, and chunky crisp white sneakers.",
     outfit: {
-      styleName: "Modern Female Martial Artist",
-      topDescription: "Fitted athletic fighting top with protective chest guard",
-      bottomDescription: "High-mobility athletic combat leggings",
-      footwear: "Low-profile ninja-inspired split-toe combat shoes",
-      gloves: "Reinforced forearm guards and wrist wraps"
+      styleName: "Red Puffer & Crossbody Street Style",
+      topDescription: "Bright crimson quilted puffer jacket worn open over cream cable-knit sweater with red crescent crossbody bag",
+      bottomDescription: "Charcoal-gray relaxed joggers with silver side-seam rivet studs and ankle cuffs",
+      footwear: "Chunky crisp white platform athletic sneakers",
+      gloves: "Bare-knuckle street fighting stance with silver-buttoned red jacket cuffs"
     },
     appearance: {
-      skinTone: 16574418,
-      hairColor: 1973067,
-      hairStyle: "ponytail",
-      primaryColor: 8141549,
-      // Royal purple martial suit
-      secondaryColor: 1120295,
-      // Dark stealth leggings
-      accentColor: 12616956,
-      // Magenta glowing wrist wraps
+      skinTone: 16041640,
+      // Fair warm peach skin tone matching Tripo3D model
+      hairColor: 2496276,
+      // Deep dark espresso brunette wavy hair
+      eyeColor: 2824208,
+      // Large expressive dark brown eyes
+      lipColor: 13715785,
+      // Vibrant warm red-rose smile
+      hairStyle: "half_up_wavy",
+      // Voluminous parted wavy hair cascading over shoulders
+      primaryColor: 13111342,
+      // Bright crimson/red quilted puffer jacket & crossbody bag
+      secondaryColor: 5395035,
+      // Charcoal/slate gray studded jogger pants
+      accentColor: 16317180,
+      // Crisp off-white sweater & chunky white sneakers
       gender: "female",
-      scale: { x: 0.92, y: 0.98, z: 0.92 }
+      scale: { x: 0.96, y: 1, z: 0.96 }
     },
     specialAttack: {
       name: "PHOENIX KICK",
       type: "phoenix_kick",
       damage: 20,
       cooldown: 6,
-      color: 15680580,
-      secondaryColor: 16436245,
-      description: "Launches a soaring rising martial kick enveloped in red and gold radiant phoenix flame trails."
+      color: 13111342,
+      secondaryColor: 16622767,
+      description: "Launches a soaring rising martial kick enveloped in crimson-red and radiant rose energy trails."
     },
     stats: {
       maxHealth: 100,
@@ -243,37 +265,42 @@ const CHARACTERS_REGISTRY = {
     }
   },
   fighter_05: {
-    id: "fighter_05",
-    name: "MAYA",
-    // Replaceable with real name later
+    id: "sevil",
+    name: "SEVIL",
+    displayName: "Sevil",
     gender: "female",
-    title: "DESERT BLADE",
-    archetype: "Street Combat Specialist",
-    bio: "A relentless street combat veteran who pairs punishing close-range strikes with comfortable athletic gear.",
-    avatarIcon: "🔥",
-    portraitPath: "/assets/characters/fighter-05/portrait.png",
-    modelPath: "/assets/characters/fighter-05/model.glb",
+    title: "BOHO BLOSSOM",
+    archetype: "Floral Boho Striker",
+    bio: "A vibrant bohemian martial artist adorned with a daisy flower crown, floral bell-sleeve tunic, and flared embroidered trousers, striking with fluid precision.",
+    avatarIcon: "🌼",
+    portraitPath: "/assets/characters/sevil/preview.webp",
+    previewImagePath: "/assets/characters/sevil/preview.webp",
+    modelPath: "/assets/characters/sevil/model.glb",
     positionOffset: { x: 0, y: 0, z: 0 },
-    scale: { x: 0.95, y: 1, z: 0.95 },
+    scale: { x: 0.96, y: 1, z: 0.96 },
+    visualNotes: "Stylized 3D female martial artist with center-parted dark brown bob hair, white daisy flower crown, warm smile, turquoise choker, and medallion necklace.",
+    outfitNotes: "Floral bell-sleeved boho tunic in golden yellow, pink, and brown with mandala medallion belt, fingerless brown combat wraps, floral-embroidered flared brown pants, and rugged lace-up boots.",
     outfit: {
-      styleName: "Stylish Street-Combat Striker",
-      topDescription: "Comfortable athletic sports top with traditional fighter cord bindings",
-      bottomDescription: "Relaxed athletic street-combat trousers",
-      footwear: "Lightweight ankle-supported street combat shoes",
-      gloves: "Traditional rope and canvas hand bindings"
+      styleName: "Floral Boho & Daisy Crown",
+      topDescription: "Off-shoulder floral bohemian bell-sleeve tunic with turquoise choker and mandala medallion belt",
+      bottomDescription: "Flared brown bell-bottom trousers with vibrant floral hem embroidery",
+      footwear: "Chunky brown lace-up combat boots",
+      gloves: "Fingerless brown leather combat wraps with red wrist bands"
     },
     appearance: {
-      skinTone: 9658173,
-      hairColor: 657930,
-      hairStyle: "braids",
-      primaryColor: 12456508,
-      // Crimson combat crop
-      secondaryColor: 16096779,
-      // Golden athletic trousers
-      accentColor: 16436245,
-      // Gold forehead warrior band
+      skinTone: 15844e3,
+      hairColor: 3875353,
+      eyeColor: 3875353,
+      lipColor: 12131356,
+      hairStyle: "half_up_wavy",
+      primaryColor: 14251782,
+      // Golden floral boho tunic
+      secondaryColor: 6044214,
+      // Brown flared embroidered trousers
+      accentColor: 16707722,
+      // Daisy flower crown & floral accents
       gender: "female",
-      scale: { x: 0.95, y: 1, z: 0.95 }
+      scale: { x: 0.96, y: 1, z: 0.96 }
     },
     specialAttack: {
       name: "DRAGON SPIN",
@@ -303,10 +330,15 @@ const CHARACTERS_REGISTRY = {
     }
   }
 };
+CHARACTERS_REGISTRY["tacir"] = CHARACTERS_REGISTRY["fighter_01"];
 CHARACTERS_REGISTRY["alex"] = CHARACTERS_REGISTRY["fighter_01"];
+CHARACTERS_REGISTRY["farhad"] = CHARACTERS_REGISTRY["fighter_02"];
 CHARACTERS_REGISTRY["max"] = CHARACTERS_REGISTRY["fighter_02"];
+CHARACTERS_REGISTRY["rufat"] = CHARACTERS_REGISTRY["fighter_03"];
 CHARACTERS_REGISTRY["ryan"] = CHARACTERS_REGISTRY["fighter_03"];
+CHARACTERS_REGISTRY["aynur"] = CHARACTERS_REGISTRY["fighter_04"];
 CHARACTERS_REGISTRY["luna"] = CHARACTERS_REGISTRY["fighter_04"];
+CHARACTERS_REGISTRY["sevil"] = CHARACTERS_REGISTRY["fighter_05"];
 CHARACTERS_REGISTRY["maya"] = CHARACTERS_REGISTRY["fighter_05"];
 const CHARACTER_LIST = [
   CHARACTERS_REGISTRY["fighter_01"],
@@ -317,6 +349,7 @@ const CHARACTER_LIST = [
 ];
 
 class ProceduralHumanoid {
+  static avatarTextureCache = /* @__PURE__ */ new Map();
   static create(config) {
     const root = new THREE.Group();
     root.name = `fighter_${config.id}`;
@@ -328,7 +361,7 @@ class ProceduralHumanoid {
       metalness: 0.05
     });
     const lipMat = new THREE.MeshStandardMaterial({
-      color: ProceduralHumanoid.blendColor(app.skinTone, 12131356, 0.25),
+      color: app.lipColor || ProceduralHumanoid.blendColor(app.skinTone, 12131356, 0.25),
       roughness: 0.55,
       metalness: 0.05
     });
@@ -357,7 +390,7 @@ class ProceduralHumanoid {
       roughness: 0.2
     });
     const irisMat = new THREE.MeshStandardMaterial({
-      color: 1976635,
+      color: app.eyeColor || 1976635,
       roughness: 0.15
     });
     const torsoW = isFemale ? 0.44 : 0.54;
@@ -550,6 +583,14 @@ class ProceduralHumanoid {
     rightFootMesh.castShadow = true;
     rightFoot.add(rightFootMesh);
     root.scale.set(app.scale.x, app.scale.y, app.scale.z);
+    if (config.previewImagePath || config.id === "aynur" || config.id === "sevil") {
+      hips.traverse((child) => {
+        if (child.isMesh) {
+          child.visible = false;
+        }
+      });
+      ProceduralHumanoid.attachAynurAvatarPlane(root, config.previewImagePath || config.portraitPath);
+    }
     const punchHitboxGeo = new THREE.SphereGeometry(0.35, 8, 8);
     const punchHitboxMat = new THREE.MeshBasicMaterial({ visible: false, wireframe: true, color: 16711680 });
     const punchHitboxMesh = new THREE.Mesh(punchHitboxGeo, punchHitboxMat);
@@ -667,7 +708,104 @@ class ProceduralHumanoid {
       const rightBraid = new THREE.Mesh(braidGeo, hairMat);
       rightBraid.position.set(-0.16, 0.28, -0.05);
       head.add(leftBraid, rightBraid);
+    } else if (style === "half_up_wavy") {
+      const hairCapGeo = new THREE.SphereGeometry(0.205, 22, 18, 0, Math.PI * 2, 0, Math.PI * 0.68);
+      hairCapGeo.scale(1.12, 1.18, 1.14);
+      const hairCap = new THREE.Mesh(hairCapGeo, hairMat);
+      hairCap.position.set(0, 0.3, -0.01);
+      head.add(hairCap);
+      const topWaveLeftGeo = new THREE.SphereGeometry(0.115, 16, 14);
+      topWaveLeftGeo.scale(1.35, 0.72, 1.15);
+      const topWaveLeft = new THREE.Mesh(topWaveLeftGeo, hairMat);
+      topWaveLeft.position.set(0.085, 0.425, 0.085);
+      topWaveLeft.rotation.z = -0.28;
+      const topWaveRightGeo = new THREE.SphereGeometry(0.105, 16, 14);
+      topWaveRightGeo.scale(1.25, 0.68, 1.12);
+      const topWaveRight = new THREE.Mesh(topWaveRightGeo, hairMat);
+      topWaveRight.position.set(-0.085, 0.415, 0.08);
+      topWaveRight.rotation.z = 0.25;
+      head.add(topWaveLeft, topWaveRight);
+      const waveOffsets = [
+        // Left side cascading waves
+        { x: 0.185, y: 0.32, z: 0.05, r: 0.072, rotZ: 0.14, rotX: -0.05 },
+        { x: 0.205, y: 0.22, z: 0.06, r: 0.068, rotZ: -0.1, rotX: 0.08 },
+        { x: 0.175, y: 0.12, z: 0.07, r: 0.06, rotZ: 0.12, rotX: -0.04 },
+        { x: 0.195, y: 0.28, z: -0.06, r: 0.078, rotZ: 0.08, rotX: 0.1 },
+        { x: 0.18, y: 0.16, z: -0.07, r: 0.07, rotZ: -0.06, rotX: 0.12 },
+        // Right side cascading waves
+        { x: -0.185, y: 0.32, z: 0.05, r: 0.072, rotZ: -0.14, rotX: -0.05 },
+        { x: -0.205, y: 0.22, z: 0.06, r: 0.068, rotZ: 0.1, rotX: 0.08 },
+        { x: -0.175, y: 0.12, z: 0.07, r: 0.06, rotZ: -0.12, rotX: -0.04 },
+        { x: -0.195, y: 0.28, z: -0.06, r: 0.078, rotZ: -0.08, rotX: 0.1 },
+        { x: -0.18, y: 0.16, z: -0.07, r: 0.07, rotZ: 0.06, rotX: 0.12 }
+      ];
+      for (const w of waveOffsets) {
+        const lockGeo = new THREE.SphereGeometry(w.r, 12, 10);
+        lockGeo.scale(0.95, 1.65, 0.92);
+        const lockMesh = new THREE.Mesh(lockGeo, hairMat);
+        lockMesh.position.set(w.x, w.y, w.z);
+        lockMesh.rotation.set(w.rotX, 0, w.rotZ);
+        lockMesh.castShadow = true;
+        head.add(lockMesh);
+      }
+      const backCascadeGeo = new THREE.SphereGeometry(0.21, 16, 14);
+      backCascadeGeo.scale(1.15, 1.55, 0.72);
+      const backCascade = new THREE.Mesh(backCascadeGeo, hairMat);
+      backCascade.position.set(0, 0.2, -0.12);
+      backCascade.rotation.x = 0.14;
+      backCascade.castShadow = true;
+      head.add(backCascade);
     }
+  }
+  /**
+   * Attaches Aynur's exact existing avatar asset (/assets/characters/aynur/preview.webp)
+   * as an unlit, color-accurate full-body character plane anchored at ground level (y = 0),
+   * preserving the identical face, hair, clothing, colors, proportions, and pixel-art style
+   * in both Character Select (Area 2) and actual gameplay.
+   */
+  static attachAynurAvatarPlane(root, texturePath) {
+    const avatarGroup = new THREE.Group();
+    avatarGroup.name = "aynur_avatar_group";
+    avatarGroup.position.set(0, 0, 0);
+    const planeH = 2.32;
+    const planeW = planeH * (600 / 778);
+    const planeGeo = new THREE.PlaneGeometry(planeW, planeH);
+    planeGeo.translate(0, planeH * 0.5 - 0.25, 0);
+    const planeMat = new THREE.MeshBasicMaterial({
+      color: 16777215,
+      transparent: true,
+      alphaTest: 0.02,
+      side: THREE.DoubleSide,
+      toneMapped: false
+    });
+    if (typeof document !== "undefined" && typeof document.createElementNS === "function") {
+      const cachedTex = ProceduralHumanoid.avatarTextureCache.get(texturePath);
+      if (cachedTex) {
+        planeMat.map = cachedTex;
+        planeMat.needsUpdate = true;
+      } else {
+        const loader = new THREE.TextureLoader();
+        const tex = loader.load(texturePath, (loadedTex) => {
+          loadedTex.colorSpace = THREE.SRGBColorSpace;
+          loadedTex.minFilter = THREE.LinearFilter;
+          loadedTex.magFilter = THREE.LinearFilter;
+          loadedTex.generateMipmaps = false;
+          loadedTex.needsUpdate = true;
+          planeMat.map = loadedTex;
+          planeMat.needsUpdate = true;
+        });
+        tex.colorSpace = THREE.SRGBColorSpace;
+        tex.minFilter = THREE.LinearFilter;
+        tex.magFilter = THREE.LinearFilter;
+        tex.generateMipmaps = false;
+        ProceduralHumanoid.avatarTextureCache.set(texturePath, tex);
+        planeMat.map = tex;
+      }
+    }
+    const avatarMesh = new THREE.Mesh(planeGeo, planeMat);
+    avatarMesh.name = "aynur_avatar_plane";
+    avatarGroup.add(avatarMesh);
+    root.add(avatarGroup);
   }
 }
 
@@ -704,6 +842,129 @@ class AnimationController {
     const currentPose = this.samplePose(this.currentState, this.stateTime);
     const prevPose = this.samplePose(this.previousState, this.stateTime);
     this.applyBlendedPose(prevPose, currentPose, this.transitionAlpha);
+    this.updateAvatarSprite(this.stateTime);
+  }
+  updateAvatarSprite(t) {
+    const avatarGroup = this.bones.root?.getObjectByName("aynur_avatar_group");
+    if (!avatarGroup) return;
+    const dir = avatarGroup.scale.x < 0 ? -1 : 1;
+    let posX = 0;
+    let posY = 0;
+    let rotZ = 0;
+    let scaleX = 1;
+    let scaleY = 1;
+    switch (this.currentState) {
+      case "idle": {
+        const breathe = Math.sin(t * 3.2) * 0.012;
+        scaleY = 1 + breathe;
+        scaleX = 1 - breathe * 0.35;
+        break;
+      }
+      case "walk_forward":
+      case "walk_backward": {
+        const walkDir = this.currentState === "walk_forward" ? 1 : -0.8;
+        const cycle = Math.sin(t * 9);
+        posY = Math.abs(cycle) * 0.06;
+        rotZ = -0.045 * walkDir * dir + cycle * 0.02;
+        break;
+      }
+      case "jump": {
+        scaleY = 1.03;
+        scaleX = 0.98;
+        rotZ = -0.04 * dir;
+        break;
+      }
+      case "crouch":
+      case "block_low": {
+        scaleY = 0.76;
+        scaleX = 1.04;
+        rotZ = -0.04 * dir;
+        break;
+      }
+      case "block": {
+        scaleY = 0.96;
+        posX = -0.06 * dir;
+        rotZ = 0.05 * dir;
+        break;
+      }
+      case "punch":
+      case "punch_light":
+      case "punch_heavy":
+      case "punch_jump":
+      case "punch_crouch": {
+        const isHeavy = this.currentState === "punch_heavy";
+        const dur = isHeavy ? 0.36 : 0.2;
+        const p = Math.min(1, t / dur);
+        const reach = p < 0.38 ? p / 0.38 : 1 - (p - 0.38) / 0.62;
+        posX = (isHeavy ? 0.36 : 0.22) * reach * dir;
+        rotZ = -(isHeavy ? 0.12 : 0.07) * reach * dir;
+        scaleY = this.currentState === "punch_crouch" ? 0.78 : 1;
+        scaleX = 1 + 0.04 * reach;
+        break;
+      }
+      case "kick":
+      case "kick_light":
+      case "kick_heavy":
+      case "kick_jump":
+      case "kick_crouch": {
+        const isHeavy = this.currentState === "kick_heavy";
+        const dur = isHeavy ? 0.42 : 0.26;
+        const p = Math.min(1, t / dur);
+        const ext = p < 0.4 ? p / 0.4 : 1 - (p - 0.4) / 0.6;
+        posX = (isHeavy ? 0.42 : 0.28) * ext * dir;
+        posY = (isHeavy ? 0.1 : 0.04) * ext;
+        rotZ = -(isHeavy ? 0.14 : 0.09) * ext * dir;
+        scaleY = this.currentState === "kick_crouch" ? 0.76 : 1;
+        scaleX = 1 + 0.05 * ext;
+        break;
+      }
+      case "special":
+      case "special_alex":
+      case "special_max":
+      case "special_ryan":
+      case "special_luna":
+      case "special_maya": {
+        const dur = 0.5;
+        const p = Math.min(1, t / dur);
+        const ext = Math.sin(p * Math.PI);
+        posX = 0.48 * ext * dir;
+        posY = 0.2 * ext;
+        rotZ = -0.16 * ext * dir;
+        scaleX = 1 + 0.06 * ext;
+        scaleY = 1 + 0.04 * ext;
+        break;
+      }
+      case "hurt":
+      case "hurt_high":
+      case "hurt_low":
+      case "hurt_heavy": {
+        const dur = 0.28;
+        const p = Math.min(1, t / dur);
+        const recoil = Math.sin(p * Math.PI);
+        posX = -0.18 * recoil * dir;
+        rotZ = 0.15 * recoil * dir;
+        break;
+      }
+      case "ko": {
+        const p = Math.min(1, t / 0.55);
+        const ease = 1 - Math.pow(1 - p, 3);
+        rotZ = 1.48 * ease * dir;
+        posY = 0.12 * Math.sin(p * Math.PI);
+        break;
+      }
+      case "victory":
+      case "victory_alex":
+      case "victory_max":
+      case "victory_ryan":
+      case "victory_luna":
+      case "victory_maya": {
+        posY = Math.abs(Math.sin(t * 5)) * 0.12;
+        break;
+      }
+    }
+    avatarGroup.position.set(posX, posY, 0);
+    avatarGroup.rotation.set(0, 0, rotZ);
+    avatarGroup.scale.set(dir * scaleX, scaleY, 1);
   }
   applyBlendedPose(poseA, poseB, alpha) {
     const boneKeys = [
@@ -1425,7 +1686,14 @@ class Fighter {
     this.anim.play("idle", true);
   }
   updateFacing() {
-    this.root.rotation.y = this.facing === 1 ? 0 : Math.PI;
+    const avatarGroup = this.root.getObjectByName("aynur_avatar_group");
+    if (avatarGroup) {
+      this.root.rotation.y = 0;
+      const absScaleX = Math.abs(avatarGroup.scale.x) || 1;
+      avatarGroup.scale.x = this.facing === 1 ? absScaleX : -absScaleX;
+      return;
+    }
+    this.root.rotation.y = this.facing === 1 ? Math.PI * 0.38 : -Math.PI * 0.38;
   }
   autoFaceOpponent(opponentX) {
     if (this.isKnockedOut || this.isVictorious) return;
@@ -1791,11 +2059,11 @@ class Fighter {
     this.isBlocking = false;
     const charId = this.config.id.toLowerCase();
     let vicAnim = "victory";
-    if (charId.includes("01") || charId.includes("alex")) vicAnim = "victory_alex";
-    else if (charId.includes("02") || charId.includes("max")) vicAnim = "victory_max";
-    else if (charId.includes("03") || charId.includes("ryan")) vicAnim = "victory_ryan";
-    else if (charId.includes("04") || charId.includes("luna")) vicAnim = "victory_luna";
-    else if (charId.includes("05") || charId.includes("maya")) vicAnim = "victory_maya";
+    if (charId.includes("01") || charId.includes("alex") || charId.includes("tacir")) vicAnim = "victory_alex";
+    else if (charId.includes("02") || charId.includes("max") || charId.includes("farhad")) vicAnim = "victory_max";
+    else if (charId.includes("03") || charId.includes("ryan") || charId.includes("rufat")) vicAnim = "victory_ryan";
+    else if (charId.includes("04") || charId.includes("luna") || charId.includes("aynur")) vicAnim = "victory_luna";
+    else if (charId.includes("05") || charId.includes("maya") || charId.includes("sevil")) vicAnim = "victory_maya";
     this.anim.play(vicAnim, true);
   }
   update(dt, arenaHalfWidth) {
@@ -1878,7 +2146,7 @@ class CharacterModelLoader {
    * If not available or if loading fails, gracefully falls back to the high-detail procedural humanoid.
    */
   static async loadCharacterModel(config) {
-    if (!config.modelPath) {
+    if (!config.modelPath || config.previewImagePath || config.id === "aynur" || config.id === "sevil") {
       return ProceduralHumanoid.create(config);
     }
     try {
@@ -2700,6 +2968,33 @@ class AudioManager {
   }
 }
 
+const ARENA_LIST = [
+  {
+    id: "khirdalan",
+    name: "KHIRDALAN",
+    subtitle: "Night Street (Default)",
+    imagePath: null
+  },
+  {
+    id: "warsaw",
+    name: "WARSAW",
+    subtitle: "Palace of Culture",
+    imagePath: "/assets/arenas/warsaw.jpg"
+  },
+  {
+    id: "krakow",
+    name: "KRAKOW",
+    subtitle: "Main Market Square",
+    imagePath: "/assets/arenas/krakow.jpg"
+  },
+  {
+    id: "baku",
+    name: "BAKU",
+    subtitle: "Flame Towers & Boulevard",
+    imagePath: "/assets/arenas/baku.jpg"
+  }
+];
+
 class CharacterPreviewRenderer {
   canvas;
   renderer;
@@ -2768,7 +3063,8 @@ class CharacterPreviewRenderer {
     }
     this.currentModelResult = ProceduralHumanoid.create(config);
     this.currentModelResult.root.position.set(0, 0, 0);
-    this.currentModelResult.root.rotation.y = this.baseFacingAngle;
+    const hasAvatarPlane = !!this.currentModelResult.root.getObjectByName("aynur_avatar_group");
+    this.currentModelResult.root.rotation.y = hasAvatarPlane ? 0 : this.baseFacingAngle;
     this.scene.add(this.currentModelResult.root);
     this.animController = new AnimationController(this.currentModelResult.bones);
     this.animController.play("idle", true);
@@ -2776,9 +3072,14 @@ class CharacterPreviewRenderer {
   update(dt) {
     if (!this.currentModelResult || !this.animController) return;
     this.animController.update(dt);
-    this.rotationAngle += dt * 0.6;
-    const sway = Math.sin(this.rotationAngle) * 0.22;
-    this.currentModelResult.root.rotation.y = this.baseFacingAngle + sway;
+    const hasAvatarPlane = !!this.currentModelResult.root.getObjectByName("aynur_avatar_group");
+    if (hasAvatarPlane) {
+      this.currentModelResult.root.rotation.y = 0;
+    } else {
+      this.rotationAngle += dt * 0.6;
+      const sway = Math.sin(this.rotationAngle) * 0.22;
+      this.currentModelResult.root.rotation.y = this.baseFacingAngle + sway;
+    }
     this.renderer.render(this.scene, this.camera);
   }
 }
@@ -2803,7 +3104,9 @@ class UIManager {
   // Character Select state
   p1SelectIndex = 0;
   p2SelectIndex = 3;
-  // Default P2 to Luna
+  // Default P2 to Aynur
+  arenaSelectIndex = 0;
+  // Default to Khirdalan (index 0)
   p1Locked = false;
   p2Locked = false;
   isCharSelectActive = false;
@@ -2854,6 +3157,7 @@ class UIManager {
     this.initEventListeners();
     this.init3DPreviews();
     this.renderCharacterCards();
+    this.renderArenaCards();
     this.updateCharacterSelectionUI();
   }
   init3DPreviews() {
@@ -2926,13 +3230,16 @@ class UIManager {
       const card = document.createElement("div");
       card.className = "character-card";
       card.id = `char-card-${index}`;
+      const hasRealPortrait = char.id === "aynur" || !!char.previewImagePath;
+      const portraitMarkup = hasRealPortrait ? `<img src="${char.portraitPath}" alt="${char.name}" class="card-portrait-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+           <div class="card-avatar-graphic" style="display:none;">${char.avatarIcon}</div>` : `<div class="card-avatar-graphic">${char.avatarIcon}</div>`;
       card.innerHTML = `
         <div class="card-portrait-wrap">
           <div class="card-player-indicators">
             <span class="p-tag tag-p1">P1</span>
             <span class="p-tag tag-p2">P2</span>
           </div>
-          <div class="card-avatar-graphic">${char.avatarIcon}</div>
+          ${portraitMarkup}
         </div>
         <div class="card-details">
           <div class="card-name">${char.name}</div>
@@ -2956,7 +3263,39 @@ class UIManager {
       container.appendChild(card);
     });
   }
+  renderArenaCards() {
+    const container = document.getElementById("arenas-carousel");
+    if (!container) return;
+    container.innerHTML = "";
+    ARENA_LIST.forEach((arena, index) => {
+      const card = document.createElement("div");
+      card.className = "arena-card";
+      card.id = `arena-card-${index}`;
+      const thumbMarkup = arena.imagePath ? `<img src="${arena.imagePath}" alt="${arena.name}" class="arena-thumb-img" />` : `<div class="arena-thumb-default">🌃 3D STREET</div>`;
+      card.innerHTML = `
+        <div class="arena-thumb-wrap">
+          ${thumbMarkup}
+        </div>
+        <div class="arena-card-info">
+          <div class="arena-card-name">${arena.name}</div>
+          <div class="arena-card-sub">${arena.subtitle}</div>
+        </div>
+      `;
+      card.addEventListener("click", () => {
+        this.arenaSelectIndex = index;
+        this.audio.playMenuSelect();
+        this.updateCharacterSelectionUI();
+        this.listeners.onArenaSelected?.(arena.id);
+      });
+      container.appendChild(card);
+    });
+  }
   updateCharacterSelectionUI() {
+    ARENA_LIST.forEach((_, idx) => {
+      const aCard = document.getElementById(`arena-card-${idx}`);
+      if (!aCard) return;
+      aCard.classList.toggle("selected", this.arenaSelectIndex === idx);
+    });
     CHARACTER_LIST.forEach((_, idx) => {
       const card = document.getElementById(`char-card-${idx}`);
       if (!card) return;
@@ -2995,6 +3334,17 @@ class UIManager {
   // Handle Character Select Keyboard Controls
   handleCharSelectInput(input) {
     let changed = false;
+    if (input.arenaPrev) {
+      this.arenaSelectIndex = (this.arenaSelectIndex - 1 + ARENA_LIST.length) % ARENA_LIST.length;
+      this.audio.playMenuHover();
+      this.listeners.onArenaSelected?.(ARENA_LIST[this.arenaSelectIndex].id);
+      changed = true;
+    } else if (input.arenaNext) {
+      this.arenaSelectIndex = (this.arenaSelectIndex + 1) % ARENA_LIST.length;
+      this.audio.playMenuHover();
+      this.listeners.onArenaSelected?.(ARENA_LIST[this.arenaSelectIndex].id);
+      changed = true;
+    }
     if (!this.p1Locked) {
       if (input.p1Left) {
         this.p1SelectIndex = (this.p1SelectIndex - 1 + CHARACTER_LIST.length) % CHARACTER_LIST.length;
@@ -3037,7 +3387,8 @@ class UIManager {
       this.p2Locked = false;
       const p1Char = CHARACTER_LIST[this.p1SelectIndex];
       const p2Char = CHARACTER_LIST[this.p2SelectIndex];
-      this.listeners.onBothFightersLocked(p1Char, p2Char);
+      const selectedArena = ARENA_LIST[this.arenaSelectIndex] || ARENA_LIST[0];
+      this.listeners.onBothFightersLocked(p1Char, p2Char, selectedArena.id);
     }
   }
   // --- SCREEN SWITCHING ---
@@ -3061,12 +3412,22 @@ class UIManager {
     this.hideAllScreens();
     this.vsScreenEl.classList.remove("hidden");
     this.vsScreenEl.classList.add("active");
-    document.getElementById("vs-p1-img").textContent = p1Char.avatarIcon;
+    const vsP1ImgEl = document.getElementById("vs-p1-img");
+    if (p1Char.id === "aynur" || p1Char.previewImagePath) {
+      vsP1ImgEl.innerHTML = `<img src="${p1Char.portraitPath}" alt="${p1Char.name}" class="vs-portrait-img" onerror="this.parentElement.textContent='${p1Char.avatarIcon}';" />`;
+    } else {
+      vsP1ImgEl.textContent = p1Char.avatarIcon;
+    }
     document.getElementById("vs-p1-name").textContent = p1Char.name;
     document.getElementById("vs-p1-title").textContent = p1Char.title;
     const p1OutfitEl = document.getElementById("vs-p1-outfit");
     if (p1OutfitEl) p1OutfitEl.textContent = p1Char.outfit?.styleName || p1Char.archetype;
-    document.getElementById("vs-p2-img").textContent = p2Char.avatarIcon;
+    const vsP2ImgEl = document.getElementById("vs-p2-img");
+    if (p2Char.id === "aynur" || p2Char.previewImagePath) {
+      vsP2ImgEl.innerHTML = `<img src="${p2Char.portraitPath}" alt="${p2Char.name}" class="vs-portrait-img" onerror="this.parentElement.textContent='${p2Char.avatarIcon}';" />`;
+    } else {
+      vsP2ImgEl.textContent = p2Char.avatarIcon;
+    }
     document.getElementById("vs-p2-name").textContent = p2Char.name;
     document.getElementById("vs-p2-title").textContent = p2Char.title;
     const p2OutfitEl = document.getElementById("vs-p2-outfit");
@@ -3333,15 +3694,15 @@ assert(CHARACTERS_REGISTRY["fighter_03"].gender === "male", "Fighter 03 is Male"
 assert(CHARACTERS_REGISTRY["fighter_04"].gender === "female", "Fighter 04 is Female");
 assert(CHARACTERS_REGISTRY["fighter_05"].gender === "female", "Fighter 05 is Female");
 assert(!!CHARACTERS_REGISTRY["fighter_01"].outfit.styleName, "Fighter 01 has custom outfit configuration");
-assert(CHARACTERS_REGISTRY["fighter_01"].modelPath.includes("fighter-01/model.glb"), "Fighter 01 has GLB model path configured");
+assert(CHARACTERS_REGISTRY["fighter_01"].modelPath.includes("model.glb"), "Fighter 01 has GLB model path configured");
 console.log("\n--- TEST 1: Select Different Characters ---");
 const p1Char = CHARACTERS_REGISTRY["fighter_01"];
-const p2Char = CHARACTERS_REGISTRY["fighter_04"];
-assert(p1Char.id === "fighter_01" && p2Char.id === "fighter_04", "Both players can select different characters (Fighter 1 vs Fighter 4)");
+const p2Char = CHARACTERS_REGISTRY["aynur"];
+assert((p1Char.id === "tacir" || p1Char.id === "fighter_01") && (p2Char.id === "aynur" || p2Char.id === "fighter_04") && p2Char.name === "AYNUR", "Both players can select different characters (Tacir vs Aynur)");
 console.log("\n--- TEST 2: Select Same Character (Mirror Match) ---");
 const mirrorP1 = CHARACTERS_REGISTRY["fighter_02"];
 const mirrorP2 = CHARACTERS_REGISTRY["fighter_02"];
-assert(mirrorP1.id === mirrorP2.id && mirrorP1.name === "MAX", "Both players can select the same character (Max vs Max mirror match)");
+assert(mirrorP1.id === mirrorP2.id && mirrorP1.name === "FARHAD", "Both players can select the same character (Farhad vs Farhad mirror match)");
 console.log("\n--- TEST 2B: Safe Model Loader Fallback ---");
 const fallbackMesh = await CharacterModelLoader.loadCharacterModel(p1Char);
 assert(!!fallbackMesh && !!fallbackMesh.root && !!fallbackMesh.bones, "Model loader safely returns working mesh when external GLB is missing");

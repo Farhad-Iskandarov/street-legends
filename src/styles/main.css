@@ -686,6 +686,23 @@ kbd {
   font-size: 3.5rem;
 }
 
+.card-portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+}
+
+.vs-portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  border-radius: 50%;
+  display: block;
+}
+
 .card-player-indicators {
   position: absolute;
   top: 10px;
@@ -821,6 +838,113 @@ kbd {
   font-style: italic;
   color: #ffbe0b;
   text-shadow: 0 0 20px rgba(255, 190, 11, 0.8);
+}
+
+/* Place / Arena Selector Bar */
+.arena-select-section {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.arena-select-label {
+  font-family: var(--font-hud);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  color: #facc15;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(250, 204, 21, 0.4);
+}
+
+.arenas-carousel {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 12px;
+  width: 100%;
+}
+
+.arena-card {
+  width: 165px;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.92), rgba(10, 15, 28, 0.96));
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+}
+
+.arena-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(250, 204, 21, 0.6);
+}
+
+.arena-card.selected {
+  border-color: #facc15;
+  box-shadow: 0 0 18px rgba(250, 204, 21, 0.65), inset 0 0 10px rgba(250, 204, 21, 0.2);
+  transform: translateY(-3px) scale(1.03);
+}
+
+.arena-thumb-wrap {
+  width: 100%;
+  height: 54px;
+  background: linear-gradient(180deg, #060913 0%, #1e1b4b 70%, #181c24 100%);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arena-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.arena-thumb-default {
+  font-family: var(--font-hud);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #38bdf8;
+  text-shadow: 0 0 8px rgba(56, 189, 248, 0.8);
+}
+
+.arena-card-info {
+  padding: 5px 8px;
+  text-align: center;
+  background: #0f172a;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.arena-card-name {
+  font-family: var(--font-hud);
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  color: #fff;
+}
+
+.arena-card.selected .arena-card-name {
+  color: #facc15;
+}
+
+.arena-card-sub {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  color: #94a3b8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .select-footer {

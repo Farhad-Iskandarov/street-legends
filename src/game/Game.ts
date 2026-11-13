@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { FightingArena } from '../scenes/FightingArena';
+import { FightingArena, ArenaId } from '../scenes/FightingArena';
 import { CameraController } from './CameraController';
 import { InputManager } from './InputManager';
 import { AudioManager } from './AudioManager';
@@ -58,9 +58,9 @@ export class Game {
     this.audio = new AudioManager();
     this.vfx = new VFXManager(this.arena.scene);
 
-    // 4. Default Selected Fighters (Alex vs Luna)
+    // 4. Default Selected Fighters (Alex vs Aynur)
     this.p1Config = CHARACTERS_REGISTRY['alex'];
-    this.p2Config = CHARACTERS_REGISTRY['luna'];
+    this.p2Config = CHARACTERS_REGISTRY['aynur'];
     this.fighter1 = FighterFactory.createFromConfig(1, this.p1Config);
     this.fighter2 = FighterFactory.createFromConfig(2, this.p2Config);
 
@@ -74,7 +74,8 @@ export class Game {
     this.ui = new UIManager(this.audio, {
       onStartClicked: () => this.handleStartClicked(),
       onSelectBackClicked: () => this.handleSelectBackClicked(),
-      onBothFightersLocked: (p1, p2) => this.handleFightersLocked(p1, p2),
+      onBothFightersLocked: (p1, p2, arenaId) => this.handleFightersLocked(p1, p2, arenaId),
+      onArenaSelected: (arenaId) => this.arena.setArena(arenaId),
       onRematchClicked: () => this.handleRematchClicked(),
       onCharSelectClicked: () => this.handleCharSelectClicked(),
       onMainMenuClicked: () => this.handleMainMenuClicked()
@@ -110,9 +111,10 @@ export class Game {
     this.ui.showMainMenu();
   }
 
-  private async handleFightersLocked(p1Char: CharacterConfig, p2Char: CharacterConfig): Promise<void> {
+  private async handleFightersLocked(p1Char: CharacterConfig, p2Char: CharacterConfig, arenaId: ArenaId = 'khirdalan'): Promise<void> {
     this.p1Config = p1Char;
     this.p2Config = p2Char;
+    this.arena.setArena(arenaId);
 
     // Remove existing fighters from scene
     this.arena.scene.remove(this.fighter1.root);
@@ -186,7 +188,7 @@ export class Game {
     this.ui.update(dt);
 
     // 2. Scene & Lighting Animations
-    this.arena.update(dt);
+    this.arena.update(dt, this.cameraCtrl.camera.position.x);
 
     // 3. Camera Update
     this.cameraCtrl.update(dt, this.fighter1, this.fighter2, this.arena.arenaHalfWidth);
@@ -212,13 +214,18 @@ export class Game {
     const p2Right = this.input.isKeyJustPressed('ArrowRight');
     const p2Confirm = this.input.isKeyJustPressed('KeyK');
 
+    const arenaPrev = this.input.isKeyJustPressed('KeyW') || this.input.isKeyJustPressed('ArrowUp');
+    const arenaNext = this.input.isKeyJustPressed('KeyS') || this.input.isKeyJustPressed('ArrowDown');
+
     this.ui.handleCharSelectInput({
       p1Left,
       p1Right,
       p1Confirm,
       p2Left,
       p2Right,
-      p2Confirm
+      p2Confirm,
+      arenaPrev,
+      arenaNext
     });
   }
 

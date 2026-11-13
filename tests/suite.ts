@@ -86,19 +86,19 @@ assert(CHARACTERS_REGISTRY['fighter_03'].gender === 'male', 'Fighter 03 is Male'
 assert(CHARACTERS_REGISTRY['fighter_04'].gender === 'female', 'Fighter 04 is Female');
 assert(CHARACTERS_REGISTRY['fighter_05'].gender === 'female', 'Fighter 05 is Female');
 assert(!!CHARACTERS_REGISTRY['fighter_01'].outfit.styleName, 'Fighter 01 has custom outfit configuration');
-assert(CHARACTERS_REGISTRY['fighter_01'].modelPath.includes('fighter-01/model.glb'), 'Fighter 01 has GLB model path configured');
+assert(CHARACTERS_REGISTRY['fighter_01'].modelPath.includes('model.glb'), 'Fighter 01 has GLB model path configured');
 
 // TEST 1: Both players can select different characters
 console.log('\n--- TEST 1: Select Different Characters ---');
 const p1Char = CHARACTERS_REGISTRY['fighter_01'];
-const p2Char = CHARACTERS_REGISTRY['fighter_04'];
-assert(p1Char.id === 'fighter_01' && p2Char.id === 'fighter_04', 'Both players can select different characters (Fighter 1 vs Fighter 4)');
+const p2Char = CHARACTERS_REGISTRY['aynur'];
+assert((p1Char.id === 'tacir' || p1Char.id === 'fighter_01') && (p2Char.id === 'aynur' || p2Char.id === 'fighter_04') && p2Char.name === 'AYNUR', 'Both players can select different characters (Tacir vs Aynur)');
 
 // TEST 2: Both players can select the same character (Mirror match)
 console.log('\n--- TEST 2: Select Same Character (Mirror Match) ---');
 const mirrorP1 = CHARACTERS_REGISTRY['fighter_02'];
 const mirrorP2 = CHARACTERS_REGISTRY['fighter_02'];
-assert(mirrorP1.id === mirrorP2.id && mirrorP1.name === 'MAX', 'Both players can select the same character (Max vs Max mirror match)');
+assert(mirrorP1.id === mirrorP2.id && mirrorP1.name === 'FARHAD', 'Both players can select the same character (Farhad vs Farhad mirror match)');
 
 // TEST 2B: Fallback Model Loader Graceful Degradation
 console.log('\n--- TEST 2B: Safe Model Loader Fallback ---');

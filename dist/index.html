@@ -7,8 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
-    <script type="module" crossorigin src="/assets/index-CaSbuGbU.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-Dv3Z0hI-.css">
+    <script type="module" crossorigin src="/assets/index-DhcvD5d1.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-iNHvF3Xr.css">
   </head>
   <body>
     <!-- Screen Shake & Root Wrapper -->
@@ -209,6 +209,14 @@
                 <div class="slot-status" id="p2-lock-status">CHOOSING...</div>
               </div>
             </div>
+
+            <!-- Place / Arena Selection -->
+            <div class="arena-select-section">
+              <div class="arena-select-label">CHOOSE PLACE / ARENA (<kbd>W</kbd>/<kbd>S</kbd> OR CLICK)</div>
+              <div class="arenas-carousel" id="arenas-carousel">
+                <!-- 4 Place Cards (Khirdalan, Warsaw, Krakow, Baku) populated dynamically -->
+              </div>
+            </div>
           </div>
 
           <!-- Right: Player 2 Live 3D Full-Body Preview -->
@@ -281,7 +289,7 @@
                 <span class="round-dot" id="p1-dot-1"></span>
               </div>
               <div class="cooldown-wrapper">
-                <span class="cd-label">SPECIAL</span>
+                <span class="cd-label" id="hud-p1-cd-label">SPECIAL READY</span>
                 <div class="cd-bar-track">
                   <div class="cd-bar-fill" id="hud-p1-cd"></div>
                 </div>
@@ -308,16 +316,28 @@
             </div>
             <div class="hud-sub-stats">
               <div class="cooldown-wrapper">
-                <span class="cd-label">SPECIAL</span>
                 <div class="cd-bar-track">
                   <div class="cd-bar-fill" id="hud-p2-cd"></div>
                 </div>
+                <span class="cd-label" id="hud-p2-cd-label">SPECIAL READY</span>
               </div>
               <div class="rounds-won" id="hud-p2-rounds">
                 <span class="round-dot" id="p2-dot-0"></span>
                 <span class="round-dot" id="p2-dot-1"></span>
               </div>
             </div>
+          </div>
+        </div>
+
+        <!-- Combo Counters Overlay -->
+        <div class="hud-combos">
+          <div class="combo-badge hidden" id="hud-p1-combo">
+            <span class="combo-count" id="hud-p1-combo-count">2 HITS</span>
+            <span class="combo-name" id="hud-p1-combo-name">TRIPLE STRIKE</span>
+          </div>
+          <div class="combo-badge p2-combo hidden" id="hud-p2-combo">
+            <span class="combo-count" id="hud-p2-combo-count">2 HITS</span>
+            <span class="combo-name" id="hud-p2-combo-name">TRIPLE STRIKE</span>
           </div>
         </div>
 

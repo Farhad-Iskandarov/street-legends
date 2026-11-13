@@ -103,7 +103,15 @@ export class Fighter {
   }
 
   public updateFacing(): void {
-    this.root.rotation.y = this.facing === 1 ? 0 : Math.PI;
+    const avatarGroup = this.root.getObjectByName('aynur_avatar_group');
+    if (avatarGroup) {
+      this.root.rotation.y = 0;
+      const absScaleX = Math.abs(avatarGroup.scale.x) || 1;
+      avatarGroup.scale.x = this.facing === 1 ? absScaleX : -absScaleX;
+      return;
+    }
+    // 2.5D angled side-view: face right (+X) at +70 deg, face left (-X) at -70 deg so front/3-quarter details face the camera!
+    this.root.rotation.y = this.facing === 1 ? Math.PI * 0.38 : -Math.PI * 0.38;
   }
 
   public autoFaceOpponent(opponentX: number): void {
@@ -532,11 +540,11 @@ export class Fighter {
     // Pick character-specific victory animation
     const charId = this.config.id.toLowerCase();
     let vicAnim: AnimationState = 'victory';
-    if (charId.includes('01') || charId.includes('alex')) vicAnim = 'victory_alex';
-    else if (charId.includes('02') || charId.includes('max')) vicAnim = 'victory_max';
-    else if (charId.includes('03') || charId.includes('ryan')) vicAnim = 'victory_ryan';
-    else if (charId.includes('04') || charId.includes('luna')) vicAnim = 'victory_luna';
-    else if (charId.includes('05') || charId.includes('maya')) vicAnim = 'victory_maya';
+    if (charId.includes('01') || charId.includes('alex') || charId.includes('tacir')) vicAnim = 'victory_alex';
+    else if (charId.includes('02') || charId.includes('max') || charId.includes('farhad')) vicAnim = 'victory_max';
+    else if (charId.includes('03') || charId.includes('ryan') || charId.includes('rufat')) vicAnim = 'victory_ryan';
+    else if (charId.includes('04') || charId.includes('luna') || charId.includes('aynur')) vicAnim = 'victory_luna';
+    else if (charId.includes('05') || charId.includes('maya') || charId.includes('sevil')) vicAnim = 'victory_maya';
 
     this.anim.play(vicAnim, true);
   }

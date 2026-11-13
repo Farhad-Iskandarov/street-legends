@@ -30,6 +30,8 @@ export interface CharacterMeshResult {
 }
 
 export class ProceduralHumanoid {
+  private static avatarTextureCache: Map<string, THREE.Texture> = new Map();
+
   public static create(config: CharacterConfig): CharacterMeshResult {
     const root = new THREE.Group();
     root.name = `fighter_${config.id}`;
@@ -45,7 +47,7 @@ export class ProceduralHumanoid {
     });
 
     const lipMat = new THREE.MeshStandardMaterial({
-      color: ProceduralHumanoid.blendColor(app.skinTone, 0xb91c1c, 0.25),
+      color: app.lipColor || ProceduralHumanoid.blendColor(app.skinTone, 0xb91c1c, 0.25),
       roughness: 0.55,
       metalness: 0.05
     });
@@ -80,7 +82,7 @@ export class ProceduralHumanoid {
     });
 
     const irisMat = new THREE.MeshStandardMaterial({
-      color: 0x1e293b,
+      color: app.eyeColor || 0x1e293b,
       roughness: 0.15
     });
 
@@ -351,6 +353,16 @@ export class ProceduralHumanoid {
     // Scale configuration
     root.scale.set(app.scale.x, app.scale.y, app.scale.z);
 
+    // For custom characters with an avatar asset (e.g. Aynur, Sevil), use the exact existing avatar asset in both 3D preview (Area 2) and gameplay
+    if (config.previewImagePath || config.id === 'aynur' || config.id === 'sevil') {
+      hips.traverse((child: THREE.Object3D) => {
+        if ((child as THREE.Mesh).isMesh) {
+          child.visible = false;
+        }
+      });
+      ProceduralHumanoid.attachAynurAvatarPlane(root, config.previewImagePath || config.portraitPath);
+    }
+
     // Hitboxes
     const punchHitboxGeo = new THREE.SphereGeometry(0.35, 8, 8);
     const punchHitboxMat = new THREE.MeshBasicMaterial({ visible: false, wireframe: true, color: 0xff0000 });
@@ -483,6 +495,119 @@ export class ProceduralHumanoid {
       const rightBraid = new THREE.Mesh(braidGeo, hairMat);
       rightBraid.position.set(-0.16, 0.28, -0.05);
       head.add(leftBraid, rightBraid);
+    } else if (style === 'half_up_wavy') {
+      // Voluminous crown & off-center parted wavy hair matching the Tripo3D model
+      const hairCapGeo = new THREE.SphereGeometry(0.205, 22, 18, 0, Math.PI * 2, 0, Math.PI * 0.68);
+      hairCapGeo.scale(1.12, 1.18, 1.14);
+      const hairCap = new THREE.Mesh(hairCapGeo, hairMat);
+      hairCap.position.set(0, 0.30, -0.01);
+      head.add(hairCap);
+
+      // Left & right voluminous top-part waves framing the forehead
+      const topWaveLeftGeo = new THREE.SphereGeometry(0.115, 16, 14);
+      topWaveLeftGeo.scale(1.35, 0.72, 1.15);
+      const topWaveLeft = new THREE.Mesh(topWaveLeftGeo, hairMat);
+      topWaveLeft.position.set(0.085, 0.425, 0.085);
+      topWaveLeft.rotation.z = -0.28;
+
+      const topWaveRightGeo = new THREE.SphereGeometry(0.105, 16, 14);
+      topWaveRightGeo.scale(1.25, 0.68, 1.12);
+      const topWaveRight = new THREE.Mesh(topWaveRightGeo, hairMat);
+      topWaveRight.position.set(-0.085, 0.415, 0.08);
+      topWaveRight.rotation.z = 0.25;
+      head.add(topWaveLeft, topWaveRight);
+
+      // Sculpted layered wavy locks cascading over both shoulders (front, side, and back)
+      const waveOffsets = [
+        // Left side cascading waves
+        { x: 0.185, y: 0.32, z: 0.05, r: 0.072, rotZ: 0.14, rotX: -0.05 },
+        { x: 0.205, y: 0.22, z: 0.06, r: 0.068, rotZ: -0.10, rotX: 0.08 },
+        { x: 0.175, y: 0.12, z: 0.07, r: 0.060, rotZ: 0.12, rotX: -0.04 },
+        { x: 0.195, y: 0.28, z: -0.06, r: 0.078, rotZ: 0.08, rotX: 0.10 },
+        { x: 0.180, y: 0.16, z: -0.07, r: 0.070, rotZ: -0.06, rotX: 0.12 },
+        // Right side cascading waves
+        { x: -0.185, y: 0.32, z: 0.05, r: 0.072, rotZ: -0.14, rotX: -0.05 },
+        { x: -0.205, y: 0.22, z: 0.06, r: 0.068, rotZ: 0.10, rotX: 0.08 },
+        { x: -0.175, y: 0.12, z: 0.07, r: 0.060, rotZ: -0.12, rotX: -0.04 },
+        { x: -0.195, y: 0.28, z: -0.06, r: 0.078, rotZ: -0.08, rotX: 0.10 },
+        { x: -0.180, y: 0.16, z: -0.07, r: 0.070, rotZ: 0.06, rotX: 0.12 }
+      ];
+
+      for (const w of waveOffsets) {
+        const lockGeo = new THREE.SphereGeometry(w.r, 12, 10);
+        lockGeo.scale(0.95, 1.65, 0.92);
+        const lockMesh = new THREE.Mesh(lockGeo, hairMat);
+        lockMesh.position.set(w.x, w.y, w.z);
+        lockMesh.rotation.set(w.rotX, 0, w.rotZ);
+        lockMesh.castShadow = true;
+        head.add(lockMesh);
+      }
+
+      // Full voluminous back hair cascade
+      const backCascadeGeo = new THREE.SphereGeometry(0.21, 16, 14);
+      backCascadeGeo.scale(1.15, 1.55, 0.72);
+      const backCascade = new THREE.Mesh(backCascadeGeo, hairMat);
+      backCascade.position.set(0, 0.20, -0.12);
+      backCascade.rotation.x = 0.14;
+      backCascade.castShadow = true;
+      head.add(backCascade);
     }
+  }
+
+  /**
+   * Attaches Aynur's exact existing avatar asset (/assets/characters/aynur/preview.webp)
+   * as an unlit, color-accurate full-body character plane anchored at ground level (y = 0),
+   * preserving the identical face, hair, clothing, colors, proportions, and pixel-art style
+   * in both Character Select (Area 2) and actual gameplay.
+   */
+  private static attachAynurAvatarPlane(root: THREE.Group, texturePath: string): void {
+    const avatarGroup = new THREE.Group();
+    avatarGroup.name = 'aynur_avatar_group';
+    avatarGroup.position.set(0, 0, 0);
+
+    // Aspect ratio of /assets/characters/aynur/preview.webp is 600 x 778
+    const planeH = 2.32;
+    const planeW = planeH * (600 / 778);
+    const planeGeo = new THREE.PlaneGeometry(planeW, planeH);
+    // Translate so Aynur's shoes in the image (v ~ 0.108 from bottom) stand directly on y = 0
+    planeGeo.translate(0, planeH * 0.5 - 0.25, 0);
+
+    const planeMat = new THREE.MeshBasicMaterial({
+      color: 0xffffff,
+      transparent: true,
+      alphaTest: 0.02,
+      side: THREE.DoubleSide,
+      toneMapped: false
+    });
+
+    if (typeof document !== 'undefined' && typeof document.createElementNS === 'function') {
+      const cachedTex = ProceduralHumanoid.avatarTextureCache.get(texturePath);
+      if (cachedTex) {
+        planeMat.map = cachedTex;
+        planeMat.needsUpdate = true;
+      } else {
+        const loader = new THREE.TextureLoader();
+        const tex = loader.load(texturePath, (loadedTex) => {
+          loadedTex.colorSpace = THREE.SRGBColorSpace;
+          loadedTex.minFilter = THREE.LinearFilter;
+          loadedTex.magFilter = THREE.LinearFilter;
+          loadedTex.generateMipmaps = false;
+          loadedTex.needsUpdate = true;
+          planeMat.map = loadedTex;
+          planeMat.needsUpdate = true;
+        });
+        tex.colorSpace = THREE.SRGBColorSpace;
+        tex.minFilter = THREE.LinearFilter;
+        tex.magFilter = THREE.LinearFilter;
+        tex.generateMipmaps = false;
+        ProceduralHumanoid.avatarTextureCache.set(texturePath, tex);
+        planeMat.map = tex;
+      }
+    }
+
+    const avatarMesh = new THREE.Mesh(planeGeo, planeMat);
+    avatarMesh.name = 'aynur_avatar_plane';
+    avatarGroup.add(avatarMesh);
+    root.add(avatarGroup);
   }
 }

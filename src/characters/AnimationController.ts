@@ -85,6 +85,133 @@ export class AnimationController {
     const prevPose = this.samplePose(this.previousState, this.stateTime);
 
     this.applyBlendedPose(prevPose, currentPose, this.transitionAlpha);
+    this.updateAvatarSprite(this.stateTime);
+  }
+
+  private updateAvatarSprite(t: number): void {
+    const avatarGroup = this.bones.root?.getObjectByName('aynur_avatar_group');
+    if (!avatarGroup) return;
+
+    const dir = avatarGroup.scale.x < 0 ? -1 : 1;
+    let posX = 0;
+    let posY = 0;
+    let rotZ = 0;
+    let scaleX = 1.0;
+    let scaleY = 1.0;
+
+    switch (this.currentState) {
+      case 'idle': {
+        const breathe = Math.sin(t * 3.2) * 0.012;
+        scaleY = 1.0 + breathe;
+        scaleX = 1.0 - breathe * 0.35;
+        break;
+      }
+      case 'walk_forward':
+      case 'walk_backward': {
+        const walkDir = this.currentState === 'walk_forward' ? 1 : -0.8;
+        const cycle = Math.sin(t * 9.0);
+        posY = Math.abs(cycle) * 0.06;
+        rotZ = -0.045 * walkDir * dir + cycle * 0.02;
+        break;
+      }
+      case 'jump': {
+        scaleY = 1.03;
+        scaleX = 0.98;
+        rotZ = -0.04 * dir;
+        break;
+      }
+      case 'crouch':
+      case 'block_low': {
+        scaleY = 0.76;
+        scaleX = 1.04;
+        rotZ = -0.04 * dir;
+        break;
+      }
+      case 'block': {
+        scaleY = 0.96;
+        posX = -0.06 * dir;
+        rotZ = 0.05 * dir;
+        break;
+      }
+      case 'punch':
+      case 'punch_light':
+      case 'punch_heavy':
+      case 'punch_jump':
+      case 'punch_crouch': {
+        const isHeavy = this.currentState === 'punch_heavy';
+        const dur = isHeavy ? 0.36 : 0.20;
+        const p = Math.min(1.0, t / dur);
+        const reach = p < 0.38 ? p / 0.38 : 1.0 - (p - 0.38) / 0.62;
+        posX = (isHeavy ? 0.36 : 0.22) * reach * dir;
+        rotZ = -(isHeavy ? 0.12 : 0.07) * reach * dir;
+        scaleY = this.currentState === 'punch_crouch' ? 0.78 : 1.0;
+        scaleX = 1.0 + 0.04 * reach;
+        break;
+      }
+      case 'kick':
+      case 'kick_light':
+      case 'kick_heavy':
+      case 'kick_jump':
+      case 'kick_crouch': {
+        const isHeavy = this.currentState === 'kick_heavy';
+        const dur = isHeavy ? 0.42 : 0.26;
+        const p = Math.min(1.0, t / dur);
+        const ext = p < 0.40 ? p / 0.40 : 1.0 - (p - 0.40) / 0.60;
+        posX = (isHeavy ? 0.42 : 0.28) * ext * dir;
+        posY = (isHeavy ? 0.10 : 0.04) * ext;
+        rotZ = -(isHeavy ? 0.14 : 0.09) * ext * dir;
+        scaleY = this.currentState === 'kick_crouch' ? 0.76 : 1.0;
+        scaleX = 1.0 + 0.05 * ext;
+        break;
+      }
+      case 'special':
+      case 'special_alex':
+      case 'special_max':
+      case 'special_ryan':
+      case 'special_luna':
+      case 'special_maya': {
+        const dur = 0.50;
+        const p = Math.min(1.0, t / dur);
+        const ext = Math.sin(p * Math.PI);
+        posX = 0.48 * ext * dir;
+        posY = 0.20 * ext;
+        rotZ = -0.16 * ext * dir;
+        scaleX = 1.0 + 0.06 * ext;
+        scaleY = 1.0 + 0.04 * ext;
+        break;
+      }
+      case 'hurt':
+      case 'hurt_high':
+      case 'hurt_low':
+      case 'hurt_heavy': {
+        const dur = 0.28;
+        const p = Math.min(1.0, t / dur);
+        const recoil = Math.sin(p * Math.PI);
+        posX = -0.18 * recoil * dir;
+        rotZ = 0.15 * recoil * dir;
+        break;
+      }
+      case 'ko': {
+        const p = Math.min(1.0, t / 0.55);
+        const ease = 1 - Math.pow(1 - p, 3);
+        rotZ = 1.48 * ease * dir;
+        posY = 0.12 * Math.sin(p * Math.PI);
+        break;
+      }
+      case 'victory':
+      case 'victory_alex':
+      case 'victory_max':
+      case 'victory_ryan':
+      case 'victory_luna':
+      case 'victory_maya': {
+        posY = Math.abs(Math.sin(t * 5.0)) * 0.12;
+        break;
+      }
+    }
+
+    avatarGroup.position.set(posX, posY, 0);
+    avatarGroup.rotation.set(0, 0, rotZ);
+    avatarGroup.scale.set(dir * scaleX, scaleY, 1.0);
   }
 
   private applyBlendedPose(poseA: Pose, poseB: Pose, alpha: number): void {

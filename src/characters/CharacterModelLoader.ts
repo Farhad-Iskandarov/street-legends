@@ -12,7 +12,7 @@ export class CharacterModelLoader {
    * If not available or if loading fails, gracefully falls back to the high-detail procedural humanoid.
    */
   public static async loadCharacterModel(config: CharacterConfig): Promise<CharacterMeshResult> {
-    if (!config.modelPath) {
+    if (!config.modelPath || config.previewImagePath || config.id === 'aynur' || config.id === 'sevil') {
       return ProceduralHumanoid.create(config);
     }
 

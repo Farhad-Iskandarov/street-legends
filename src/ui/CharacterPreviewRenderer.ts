@@ -88,7 +88,8 @@ export class CharacterPreviewRenderer {
 
     this.currentModelResult = ProceduralHumanoid.create(config);
     this.currentModelResult.root.position.set(0, 0, 0);
-    this.currentModelResult.root.rotation.y = this.baseFacingAngle;
+    const hasAvatarPlane = !!this.currentModelResult.root.getObjectByName('aynur_avatar_group');
+    this.currentModelResult.root.rotation.y = hasAvatarPlane ? 0 : this.baseFacingAngle;
     this.scene.add(this.currentModelResult.root);
 
     this.animController = new AnimationController(this.currentModelResult.bones);
@@ -101,10 +102,15 @@ export class CharacterPreviewRenderer {
     // Subtle breathing animation
     this.animController.update(dt);
 
-    // Gentle cinematic turntable oscillation
-    this.rotationAngle += dt * 0.6;
-    const sway = Math.sin(this.rotationAngle) * 0.22;
-    this.currentModelResult.root.rotation.y = this.baseFacingAngle + sway;
+    // Keep 2D avatar plane facing the camera directly without distortion; gently oscillate 3D procedural characters
+    const hasAvatarPlane = !!this.currentModelResult.root.getObjectByName('aynur_avatar_group');
+    if (hasAvatarPlane) {
+      this.currentModelResult.root.rotation.y = 0;
+    } else {
+      this.rotationAngle += dt * 0.6;
+      const sway = Math.sin(this.rotationAngle) * 0.22;
+      this.currentModelResult.root.rotation.y = this.baseFacingAngle + sway;
+    }
 
     this.renderer.render(this.scene, this.camera);
   }

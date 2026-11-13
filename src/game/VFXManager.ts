@@ -134,7 +134,7 @@ export class VFXManager {
     type: string,
     position: THREE.Vector3,
     facing: number,
-    colorHex: number
+    colorHex: number = 0xf97316
   ): void {
     if (type === 'fire_strike') {
       // Alex Fire Strike: Burst of orange & yellow fire sparks along punch vector

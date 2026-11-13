@@ -1,11 +1,13 @@
 import { CHARACTER_LIST, CharacterConfig } from '../characters/CharacterConfig';
+import { ARENA_LIST, ArenaId } from '../scenes/FightingArena';
 import { AudioManager } from '../game/AudioManager';
 import { CharacterPreviewRenderer } from './CharacterPreviewRenderer';
 
 export interface UIEventListeners {
   onStartClicked: () => void;
   onSelectBackClicked: () => void;
-  onBothFightersLocked: (p1Char: CharacterConfig, p2Char: CharacterConfig) => void;
+  onBothFightersLocked: (p1Char: CharacterConfig, p2Char: CharacterConfig, arenaId: ArenaId) => void;
+  onArenaSelected?: (arenaId: ArenaId) => void;
   onRematchClicked: () => void;
   onCharSelectClicked: () => void;
   onMainMenuClicked: () => void;
@@ -34,7 +36,8 @@ export class UIManager {
 
   // Character Select state
   public p1SelectIndex: number = 0;
-  public p2SelectIndex: number = 3; // Default P2 to Luna
+  public p2SelectIndex: number = 3; // Default P2 to Aynur
+  public arenaSelectIndex: number = 0; // Default to Khirdalan (index 0)
   public p1Locked: boolean = false;
   public p2Locked: boolean = false;
   private isCharSelectActive: boolean = false;
@@ -95,6 +98,7 @@ export class UIManager {
     this.initEventListeners();
     this.init3DPreviews();
     this.renderCharacterCards();
+    this.renderArenaCards();
     this.updateCharacterSelectionUI();
   }
 
@@ -184,13 +188,19 @@ export class UIManager {
       card.className = 'character-card';
       card.id = `char-card-${index}`;
 
+      const hasRealPortrait = char.id === 'aynur' || !!char.previewImagePath;
+      const portraitMarkup = hasRealPortrait
+        ? `<img src="${char.portraitPath}" alt="${char.name}" class="card-portrait-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+           <div class="card-avatar-graphic" style="display:none;">${char.avatarIcon}</div>`
+        : `<div class="card-avatar-graphic">${char.avatarIcon}</div>`;
+
       card.innerHTML = `
         <div class="card-portrait-wrap">
           <div class="card-player-indicators">
             <span class="p-tag tag-p1">P1</span>
             <span class="p-tag tag-p2">P2</span>
           </div>
-          <div class="card-avatar-graphic">${char.avatarIcon}</div>
+          ${portraitMarkup}
         </div>
         <div class="card-details">
           <div class="card-name">${char.name}</div>
@@ -218,7 +228,48 @@ export class UIManager {
     });
   }
 
+  private renderArenaCards(): void {
+    const container = document.getElementById('arenas-carousel');
+    if (!container) return;
+    container.innerHTML = '';
+
+    ARENA_LIST.forEach((arena, index) => {
+      const card = document.createElement('div');
+      card.className = 'arena-card';
+      card.id = `arena-card-${index}`;
+
+      const thumbMarkup = arena.imagePath
+        ? `<img src="${arena.imagePath}" alt="${arena.name}" class="arena-thumb-img" />`
+        : `<div class="arena-thumb-default">🌃 3D STREET</div>`;
+
+      card.innerHTML = `
+        <div class="arena-thumb-wrap">
+          ${thumbMarkup}
+        </div>
+        <div class="arena-card-info">
+          <div class="arena-card-name">${arena.name}</div>
+          <div class="arena-card-sub">${arena.subtitle}</div>
+        </div>
+      `;
+
+      card.addEventListener('click', () => {
+        this.arenaSelectIndex = index;
+        this.audio.playMenuSelect();
+        this.updateCharacterSelectionUI();
+        this.listeners.onArenaSelected?.(arena.id);
+      });
+
+      container.appendChild(card);
+    });
+  }
+
   public updateCharacterSelectionUI(): void {
+    ARENA_LIST.forEach((_, idx) => {
+      const aCard = document.getElementById(`arena-card-${idx}`);
+      if (!aCard) return;
+      aCard.classList.toggle('selected', this.arenaSelectIndex === idx);
+    });
+
     CHARACTER_LIST.forEach((_, idx) => {
       const card = document.getElementById(`char-card-${idx}`);
       if (!card) return;
@@ -273,8 +324,23 @@ export class UIManager {
     p2Left: boolean;
     p2Right: boolean;
     p2Confirm: boolean;
+    arenaPrev?: boolean;
+    arenaNext?: boolean;
   }): void {
     let changed = false;
+
+    // Arena selection via W/S or ArrowUp/ArrowDown
+    if (input.arenaPrev) {
+      this.arenaSelectIndex = (this.arenaSelectIndex - 1 + ARENA_LIST.length) % ARENA_LIST.length;
+      this.audio.playMenuHover();
+      this.listeners.onArenaSelected?.(ARENA_LIST[this.arenaSelectIndex].id);
+      changed = true;
+    } else if (input.arenaNext) {
+      this.arenaSelectIndex = (this.arenaSelectIndex + 1) % ARENA_LIST.length;
+      this.audio.playMenuHover();
+      this.listeners.onArenaSelected?.(ARENA_LIST[this.arenaSelectIndex].id);
+      changed = true;
+    }
 
     // Player 1: A / D / F
     if (!this.p1Locked) {
@@ -324,7 +390,8 @@ export class UIManager {
       this.p2Locked = false;
       const p1Char = CHARACTER_LIST[this.p1SelectIndex];
       const p2Char = CHARACTER_LIST[this.p2SelectIndex];
-      this.listeners.onBothFightersLocked(p1Char, p2Char);
+      const selectedArena = ARENA_LIST[this.arenaSelectIndex] || ARENA_LIST[0];
+      this.listeners.onBothFightersLocked(p1Char, p2Char, selectedArena.id);
     }
   }
 
@@ -354,13 +421,23 @@ export class UIManager {
     this.vsScreenEl.classList.add('active');
 
     // Populate VS Cards with high detail
-    document.getElementById('vs-p1-img')!.textContent = p1Char.avatarIcon;
+    const vsP1ImgEl = document.getElementById('vs-p1-img')!;
+    if (p1Char.id === 'aynur' || p1Char.previewImagePath) {
+      vsP1ImgEl.innerHTML = `<img src="${p1Char.portraitPath}" alt="${p1Char.name}" class="vs-portrait-img" onerror="this.parentElement.textContent='${p1Char.avatarIcon}';" />`;
+    } else {
+      vsP1ImgEl.textContent = p1Char.avatarIcon;
+    }
     document.getElementById('vs-p1-name')!.textContent = p1Char.name;
     document.getElementById('vs-p1-title')!.textContent = p1Char.title;
     const p1OutfitEl = document.getElementById('vs-p1-outfit');
     if (p1OutfitEl) p1OutfitEl.textContent = p1Char.outfit?.styleName || p1Char.archetype;
 
-    document.getElementById('vs-p2-img')!.textContent = p2Char.avatarIcon;
+    const vsP2ImgEl = document.getElementById('vs-p2-img')!;
+    if (p2Char.id === 'aynur' || p2Char.previewImagePath) {
+      vsP2ImgEl.innerHTML = `<img src="${p2Char.portraitPath}" alt="${p2Char.name}" class="vs-portrait-img" onerror="this.parentElement.textContent='${p2Char.avatarIcon}';" />`;
+    } else {
+      vsP2ImgEl.textContent = p2Char.avatarIcon;
+    }
     document.getElementById('vs-p2-name')!.textContent = p2Char.name;
     document.getElementById('vs-p2-title')!.textContent = p2Char.title;
     const p2OutfitEl = document.getElementById('vs-p2-outfit');
